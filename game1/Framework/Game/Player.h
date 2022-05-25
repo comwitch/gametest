@@ -10,4 +10,9 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
+	virtual void Move() override;
+	
+	class Control* control = nullptr;
+
+	AnimationRect* GetAnim() { return animRect; }
 };

@@ -7,9 +7,6 @@ public:
 
 	static bool Stopped() { return isTimerStopped; }
 	static float Delta() { return isTimerStopped ? 0.0f : timeElapsed; }
-	
-	static bool TimeCounter(float time);
-	
 
 	void Update();
 
@@ -25,8 +22,6 @@ private:
 
 	static bool isTimerStopped;///< 타이머 중지
 	static float timeElapsed;///< 이전 프레임으로부터 경과시간
-	
-	
 
 
 	INT64 ticksPerSecond;///< 초당 틱카운트
@@ -37,7 +32,6 @@ private:
 
 	UINT frameCount;///< 프레임 수
 	float runningTime;///< 진행 시간
-	
 	float framePerSecond;///< FPS
 
 };

@@ -2,7 +2,7 @@
 #include "Program.h"
 
 #include "Systems/Window.h"
-
+#include "Systems/Camera.h"
 #include "Demos/GUIDemo.h"
 #include "Demos/RectDemo.h"
 #include "Demos/TextureDemo.h"
@@ -16,15 +16,16 @@
 void Program::Init()
 {
 	States::Create();
-
-	vpb = new VPBuffer();
-	D3DXMatrixLookAtLH(&view, &Vector3(0, 0, 0), &Vector3(0, 0, 1), &Vector3(0, 1, 0));
-	D3DXMatrixOrthoOffCenterLH(&proj, 0.0f, (float)WinMaxWidth, 0.0f, (float)WinMaxHeight, 0, 1);
-	vpb->SetView(view);
-	vpb->SetProj(proj);
-
+	Camera::Create();
+	
+	//vpb = new VPBuffer();
+	//D3DXMatrixLookAtLH(&view, &Vector3(0, 0, 0), &Vector3(0, 0, 1), &Vector3(0, 1, 0));
+	//D3DXMatrixOrthoOffCenterLH(&proj, 0.0f, (float)WinMaxWidth, 0.0f, (float)WinMaxHeight, 0, 1);
+	//vpb->SetView(view);
+	//vpb->SetProj(proj);
+	
 	//Push(new RectDemo());
-	Push(new TextureDemo());
+	//Push(new TextureDemo());
 	//Push(new GUIDemo);
 	//Push(new ShadedDemo());
 	//Push(new RTTDemo());
@@ -47,6 +48,8 @@ void Program::Destroy()
 
 void Program::Update()
 {
+	Camera::Get()->Update();
+	
 	for (IObject* obj : objs)
 	{
 		obj->Update();
@@ -55,7 +58,7 @@ void Program::Update()
 
 void Program::Render()
 {
-	vpb->SetVSBuffer(1);
+	Camera::Get()->Render();
 	for (IObject* obj : objs)
 	{
 		obj->Render();

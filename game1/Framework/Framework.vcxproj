@@ -42,6 +42,7 @@
     <ClCompile Include="Renders\Shaders\PixelShader.cpp" />
     <ClCompile Include="Renders\Shaders\VertexShader.cpp" />
     <ClCompile Include="Renders\States.cpp" />
+    <ClCompile Include="Systems\Camera.cpp" />
     <ClCompile Include="Systems\Graphics.cpp" />
     <ClCompile Include="Systems\Keyboard.cpp" />
     <ClCompile Include="Systems\Mouse.cpp" />
@@ -49,6 +50,7 @@
     <ClCompile Include="Systems\Window.cpp" />
     <ClCompile Include="Utilities\Animator.cpp" />
     <ClCompile Include="Utilities\BoundingBox.cpp" />
+    <ClCompile Include="Utilities\Control.cpp" />
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Utilities\Gui.cpp" />
     <ClCompile Include="Utilities\Path.cpp" />
@@ -82,6 +84,7 @@
     <ClInclude Include="Renders\Shaders\PixelShader.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
     <ClInclude Include="Renders\States.h" />
+    <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Systems\Graphics.h" />
     <ClInclude Include="Systems\Keyboard.h" />
     <ClInclude Include="Systems\Mouse.h" />
@@ -89,6 +92,7 @@
     <ClInclude Include="Systems\Window.h" />
     <ClInclude Include="Utilities\Animator.h" />
     <ClInclude Include="Utilities\BoundingBox.h" />
+    <ClInclude Include="Utilities\Control.h" />
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Utilities\Gui.h" />
     <ClInclude Include="Utilities\Path.h" />

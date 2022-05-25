@@ -53,7 +53,6 @@ void Animator::Update()
 			{
 				Rate = Time::Delta();
 				currentFrameIndex = 0;
-				
 			}
 
 			currentFrame = currentClip->keyFrames[currentFrameIndex];
@@ -105,42 +104,83 @@ void Animator::SetAnim(AnimationClip * clip)
 {
 	if (clip->clipName == L"IdleR")
 	{
-		idleR = clip;
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"IdleL")
 	{
-		idleL = clip;
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"WalkR")
 	{
-		moveRight = clip;
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"WalkU")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"WalkD")
+	{
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"WalkL")
 	{
-		moveLeft = clip;
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"JumpR")
 	{
-		jumpR = clip;
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"JumpL")
 	{
-		jumpL = clip;
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"SprintR")
 	{
-		sprintR = clip;
 		AddAnimClip(clip);
 	}
 	else if (clip->clipName == L"SprintL")
 	{
-		sprintL = clip;
 		AddAnimClip(clip);
 	}
+	else if (clip->clipName == L"Attack1R")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Attack1L")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Attack2R")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Attack2L")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Attack3R")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Attack3L")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Skill1R")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Skill1L")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Skill2R")
+	{
+		AddAnimClip(clip);
+	}
+	else if (clip->clipName == L"Skill2L")
+	{
+		AddAnimClip(clip);
+	}
+
 }

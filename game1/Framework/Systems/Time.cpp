@@ -17,21 +17,13 @@ Time::~Time(void)
 
 }
 
-bool Time::TimeCounter(float time)
-{
-	
-	return false;
-}
-
 void Time::Update()
 {
 	if (isTimerStopped) return;
 
 	QueryPerformanceCounter((LARGE_INTEGER *)&currentTime);
 	timeElapsed = (float)(currentTime - lastTime) / (float)ticksPerSecond;
-	
 	runningTime += timeElapsed;
-	
 
 
 	frameCount++;
@@ -65,7 +57,5 @@ void Time::Stop()
 	INT64 stopTime = 0;
 	QueryPerformanceCounter((LARGE_INTEGER *)&stopTime);
 	runningTime += (float)(stopTime - lastTime) / (float)ticksPerSecond;
-	
 	isTimerStopped = true;
-	
 }

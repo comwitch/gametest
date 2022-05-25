@@ -30,6 +30,8 @@
     <ClCompile Include="Geomatries\AnimationRect.cpp" />
     <ClCompile Include="Game\Character.cpp" />
     <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Utilities\Control.cpp" />
+    <ClCompile Include="Systems\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -65,5 +67,7 @@
     <ClInclude Include="Geomatries\AnimationRect.h" />
     <ClInclude Include="Game\Character.h" />
     <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Utilities\Control.h" />
+    <ClInclude Include="Systems\Camera.h" />
   </ItemGroup>
 </Project>

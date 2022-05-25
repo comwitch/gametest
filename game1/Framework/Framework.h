@@ -50,6 +50,7 @@ using namespace std;
 
 #include "Utilities/SingletonBase.h"
 
+
 #include "Systems/Graphics.h"
 #include "Systems/Keyboard.h"
 #include "Systems/Mouse.h"
@@ -90,6 +91,7 @@ typedef UINT		uint;
 #include "Utilities/BoundingBox.h"
 #include "Utilities/String.h"
 #include "Utilities/Path.h"
+#include "Utilities/Control.h"
 
 
 #define WinMaxWidth 1280

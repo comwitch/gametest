@@ -12,4 +12,7 @@ public:
 
 private:
 	class Player* player = nullptr;
+	class TextureRect* tr = nullptr;
+
 };
+

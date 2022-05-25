@@ -1,9 +1,7 @@
 #include "Framework.h"
 #include "AnimationRect.h"
-#include "Systems/Time.h"
+
 #include "Utilities/Animator.h"
-
-
 
 AnimationRect::AnimationRect(Vector3 position, Vector3 size)
 	:TextureRect(position, size, 0.0f)
@@ -27,6 +25,8 @@ AnimationRect::AnimationRect(Vector3 position, Vector3 size)
 		desc.RenderTarget[0].BlendEnable = true;
 		States::CreateBlend(&desc, &bPoint[1]);
 	}
+
+	control = new Control();
 }
 
 AnimationRect::~AnimationRect()
@@ -35,6 +35,8 @@ AnimationRect::~AnimationRect()
 
 void AnimationRect::Update()
 {
+	control->SetAnimator(&animator);
+
 	MapVertexBuffer();
 	{
 		vertices[0].uv.x = animator->GetCurrentFrame().x;
@@ -53,6 +55,8 @@ void AnimationRect::Update()
 	UnmapVertexBuffer();
 
 	__super::Update();
+	
+	KeyDown += Time::Delta();
 }
 
 void AnimationRect::Render()
@@ -68,166 +72,219 @@ void AnimationRect::Render()
 
 void AnimationRect::Move()
 {
-	deltatime2 += Time::Delta();
 	
-	
-
-	if (Keyboard::Get()->Press(VK_UP) && Keyboard::Get()->Press(VK_RIGHT))
-	{
-		position.y += 50 * Time::Delta();
-		position.x += 100 * Time::Delta();
-		animator->SetCurrentAnimClip(L"WalkR");
-	}
-	else if (Keyboard::Get()->Press(VK_UP) && Keyboard::Get()->Press(VK_LEFT))
-	{
-		position.y += 50 * Time::Delta();
-		position.x -= 100 * Time::Delta();
-		animator->SetCurrentAnimClip(L"WalkL");
-	}
-	else if (Keyboard::Get()->Press(VK_DOWN) && Keyboard::Get()->Press(VK_LEFT))
-	{
-		position.y -= 50 * Time::Delta();
-		position.x -= 100 * Time::Delta();
-		animator->SetCurrentAnimClip(L"WalkL");
-	}
-	else if (Keyboard::Get()->Press(VK_DOWN) && Keyboard::Get()->Press(VK_RIGHT))
-	{
-		position.y -= 50 * Time::Delta();
-		position.x += 100 * Time::Delta();
-		animator->SetCurrentAnimClip(L"WalkR");
-	}
-	else if (Keyboard::Get()->Press(VK_LEFT))
-	{
-		if (Keyboard::Get()->Press('Z'))
-		{
-			KeyDown = Time::Delta();
-			cout << KeyDown << endl;
-			position.x -= 128 * Time::Delta();
-			KeyDown2 += KeyDown;
-			if (KeyDown2 > 0.5f)
-			{
-				position.x -= 200 * Time::Delta();
-				animator->SetCurrentAnimClip(L"SprintL");
-			}
-
-		}
-		
-		else
-		{
-			KeyDown2 = 0;
-			position.x -= 200 * Time::Delta();
-			animator->SetCurrentAnimClip(L"WalkL");
-		}
-		
-	}
-	else if (Keyboard::Get()->Press(VK_RIGHT))
-	{
-		
-		if (Keyboard::Get()->Press('Z'))
-		{
-			KeyDown = Time::Delta();
-			cout << KeyDown << endl;
-			position.x += 128 * Time::Delta();
-				KeyDown2 += KeyDown;
-				if (KeyDown2 > 0.5f)
-				{
-					position.x += 128 * Time::Delta();
-					animator->SetCurrentAnimClip(L"SprintR");
-				}
-							
-		}
-		
-		else
-		{
-			position.x += 128 * Time::Delta();
-			animator->SetCurrentAnimClip(L"WalkR");
-			KeyDown2 = 0;
-		}
-
-		
-	}
-	
-	else if (Keyboard::Get()->Up(VK_RIGHT))
-	{
-		animator->SetCurrentAnimClip(L"IdleR");
-	}
-	else if (Keyboard::Get()->Up(VK_LEFT))
-	{
-		animator->SetCurrentAnimClip(L"IdleL");
-	}
-
-	
-
-	if (Keyboard::Get()->Press(VK_UP))
-	{
-
-		position.y += 100 * Time::Delta();
-
-	}
-	else if (Keyboard::Get()->Press(VK_DOWN))
-	{
-		position.y -= 100 * Time::Delta();
-
-	}
-	else if (Keyboard::Get()->Press(VK_SPACE) && !(Keyboard::Get()->Down(VK_SPACE)))
-	{
-		JumpFlag = 1;
-		KeyDown2 = 0;
-		deltatime2 = 0;
-	}
-	else if (JumpFlag == 1)
-	{
-		
-		if ((deltatime2 - KeyDown2) < 1.2f)
-			animator->SetCurrentAnimClip(L"JumpL");
-
-		if ((deltatime2 - KeyDown2) < 0.4f)
-			position.y += 200 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) < 0.6f)
-			position.y += 40 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) < 0.8f)
-			position.y -= 40 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) < 1.2f)
-			position.y -= 220 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) > 1.3f)
-		{
-			animator->SetCurrentAnimClip(L"idleR");
-			this->JumpFlag = 0;
-
-		}
-
-	}
-	/*else if (JumpFlag == 1)
-	{
-		if (deltatime2 < 1.2f)
-			animator->SetCurrentAnimClip(L"JumpR");
-
-		if ((deltatime2 - KeyDown2) < 0.4f)
-			position.y += 200 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) < 0.6f)
-			position.y += 40 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) < 0.8f)
-			position.y -= 40 * Time::Delta();
-		else if ((deltatime2 - KeyDown2) < 1.2f)
-			position.y -= 200 * Time::Delta();
-	}*/
-	
-
-	
-	
-	else if (Keyboard::Get()->Up('Z'))
-	{
-	
-	}
-	
-
-	if (Keyboard::Get()->Press('A'))
-	{
-	
-	}
-	if (Keyboard::Get()->Press('S'))
-	{
-	
-	}
-
 }
+
+// void AnimationRect::Move()
+// {
+// 	deltaTime += Time::Delta();
+// 
+// 	if (Keyboard::Get()->Press(VK_UP) && Keyboard::Get()->Press(VK_RIGHT))
+// 	{
+// 		if (KeyDown >= 1.3f)
+// 		{
+// 			position.y += 50 * Time::Delta();
+// 			position.x += 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"SprintR");
+// 		}
+// 		else
+// 		{
+// 			position.y += 50 * Time::Delta();
+// 			position.x += 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkR");
+// 		}
+// 	}
+// 	else if (Keyboard::Get()->Press(VK_UP) && Keyboard::Get()->Press(VK_LEFT))
+// 	{
+// 		position.y += 50 * Time::Delta();
+// 		position.x -= 100 * Time::Delta();
+// 		animator->SetCurrentAnimClip(L"WalkL");
+// 	}
+// 	else if (Keyboard::Get()->Press(VK_DOWN) && Keyboard::Get()->Press(VK_LEFT))
+// 	{
+// 		position.y -= 50 * Time::Delta();
+// 		position.x -= 100 * Time::Delta();
+// 		animator->SetCurrentAnimClip(L"WalkL");
+// 	}
+// 	else if (Keyboard::Get()->Press(VK_DOWN) && Keyboard::Get()->Press(VK_RIGHT))
+// 	{
+// 		position.y -= 50 * Time::Delta();
+// 		position.x += 100 * Time::Delta();
+// 		animator->SetCurrentAnimClip(L"WalkR");
+// 	}
+// 	else if (Keyboard::Get()->Press(VK_LEFT))
+// 	{
+// 		FacingLeft = true;
+// 		
+// 		if (KeyDown >= 1.3f)
+// 		{
+// 			position.x -= 200 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"SprintL");
+// 		}
+// 		else
+// 		{
+// 			position.x -= 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkL");
+// 		}
+// 	}
+// 	else if (Keyboard::Get()->Up(VK_LEFT))
+// 	{
+// 		FacingLeft = true;
+// 		animator->SetCurrentAnimClip(L"IdleL");
+// 		KeyDown = 0.0f;
+// 	}
+// 	else if (Keyboard::Get()->Press(VK_RIGHT))
+// 	{
+// 		FacingLeft = false;
+// 		
+// 		if (KeyDown >= 1.3f)
+// 		{
+// 			position.x += 200 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"SprintR");
+// 		}
+// 		else
+// 		{
+// 			position.x += 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkR");
+// 		}
+// 	}
+// 	else if (Keyboard::Get()->Up(VK_RIGHT))
+// 	{
+// 		FacingLeft = false;
+// 		animator->SetCurrentAnimClip(L"IdleR");
+// 		KeyDown = 0.0f;
+// 	}
+// 
+// 	else if (Keyboard::Get()->Press(VK_UP))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			position.y += 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkL");
+// 		}
+// 		else
+// 		{
+// 			position.y += 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkR");
+// 		}
+// 	}
+// 	else if (Keyboard::Get()->Up(VK_UP))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			animator->SetCurrentAnimClip(L"IdleL");
+// 		}
+// 		else
+// 		{
+// 			animator->SetCurrentAnimClip(L"IdleR");
+// 		}
+// 	}
+// 	else if (Keyboard::Get()->Press(VK_DOWN))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			position.y -= 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkL");
+// 		}
+// 		else
+// 		{
+// 			position.y -= 100 * Time::Delta();
+// 			animator->SetCurrentAnimClip(L"WalkR");
+// 		}
+// 	}
+// 	else if (Keyboard::Get()->Up(VK_DOWN))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			animator->SetCurrentAnimClip(L"IdleL");
+// 		}
+// 		else
+// 		{
+// 			animator->SetCurrentAnimClip(L"IdleR");
+// 		}
+// 	}
+// 
+// 	if (Keyboard::Get()->Press(VK_SPACE) && !(Keyboard::Get()->Down(VK_SPACE)))
+// 	{
+// 		JumpFlags = true;
+// 		KeyDown = 0.0f;
+// 		deltaTime = 0.0f;
+// 	}
+// 	else if (JumpFlags == true)
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			if ((deltaTime - KeyDown) < 1.2f)
+// 				animator->SetCurrentAnimClip(L"JumpL");
+// 
+// 			if ((deltaTime - KeyDown) < 0.4f)
+// 				position.y += 200 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) < 0.6f)
+// 				position.y += 40 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) < 0.8f)
+// 				position.y -= 40 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) < 1.2f)
+// 				position.y -= 220 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) > 1.3f)
+// 			{
+// 				animator->SetCurrentAnimClip(L"IdleL");
+// 				this->JumpFlags = false;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			if ((deltaTime - KeyDown) < 1.2f)
+// 				animator->SetCurrentAnimClip(L"JumpR");
+// 
+// 			if ((deltaTime - KeyDown) < 0.4f)
+// 				position.y += 200 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) < 0.6f)
+// 				position.y += 40 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) < 0.8f)
+// 				position.y -= 40 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) < 1.2f)
+// 				position.y -= 220 * Time::Delta();
+// 			else if ((deltaTime - KeyDown) > 1.3f)
+// 			{
+// 				animator->SetCurrentAnimClip(L"IdleR");
+// 				this->JumpFlags = false;
+// 			}
+// 		}
+// 	}
+// 
+// 	if (Keyboard::Get()->Press('Z'))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			animator->SetCurrentAnimClip(L"Attack1L");
+// 		}
+// 		else
+// 		{
+// 			animator->SetCurrentAnimClip(L"Attack1R");
+// 		}
+// 	}
+// 
+// 	if (Keyboard::Get()->Press('A'))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			animator->SetCurrentAnimClip(L"Skill1L");
+// 		}
+// 		else
+// 		{
+// 			animator->SetCurrentAnimClip(L"Skill1R");
+// 		}
+// 	}
+// 
+// 	if (Keyboard::Get()->Press('S'))
+// 	{
+// 		if (FacingLeft == true)
+// 		{
+// 			animator->SetCurrentAnimClip(L"Skill2L");
+// 		}
+// 		else
+// 		{
+// 			animator->SetCurrentAnimClip(L"Skill2R");
+// 		}
+// 	}
+//}

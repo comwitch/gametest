@@ -15,15 +15,21 @@ public:
 	virtual void Move() override;
 	void SetAnimation(Animator* animator) { this->animator = animator; }
 
+	Animator** GetAnimator() { return &animator; }
+	Vector3* GetPosition() { return &position; }
+
 private:
 	class Animator* animator = nullptr;
+	class Control* control = nullptr;
 	ID3D11SamplerState* point[2];
 	ID3D11BlendState* bPoint[2];
+
 	float KeyDown = 0.0f;
-	float KeyDown2 = 0.0f;
-	bool FacingLeft = false;
-	float Jump = 0.0f;
-	float deltatime2 = 10.0f;
+	float keyRate = 0.0f;
+	float deltaTime = 0.0f;
+
+	float jump = 0.0f;
 	float timeChecker = 0.0f;
-	bool JumpFlag = 0;
+	bool FacingLeft = false;
+	bool JumpFlags = false;
 };

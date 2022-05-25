@@ -43,21 +43,5 @@ private:
 	Vector2 currentFrame = Values::ZeroVec2;
 
 	float deltaTime = 0.0f;
-
-	AnimationClip* idleL = nullptr;
-	AnimationClip* idleR = nullptr;
-	AnimationClip* moveLeft = nullptr;
-	AnimationClip* moveRight = nullptr;
-	AnimationClip* moveUp = nullptr;
-	AnimationClip* moveDown = nullptr;
-	AnimationClip* jumpL = nullptr;
-	AnimationClip* jumpR = nullptr;
-	AnimationClip* sprintR = nullptr;
-	AnimationClip* sprintL = nullptr;
-	AnimationClip* actionR = nullptr;
-	AnimationClip* actionL = nullptr;
-	AnimationClip* skill1 = nullptr;
-	AnimationClip* skill2 = nullptr;
-
 	float Rate = 0.0f;
 };

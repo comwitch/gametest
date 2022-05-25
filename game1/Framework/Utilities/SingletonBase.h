@@ -21,6 +21,8 @@ public:
 		return instance;
 	}
 
+	
+
 protected:
 	static T* instance;
 };

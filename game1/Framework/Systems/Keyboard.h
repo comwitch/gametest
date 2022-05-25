@@ -13,11 +13,6 @@ public:
 	bool Down(DWORD key) { return keyMap[key] == KEY_INPUT_STATUS_DOWN; }
 	bool Up(DWORD key) { return keyMap[key] == KEY_INPUT_STATUS_UP; }
 	bool Press(DWORD key) { return keyMap[key] == KEY_INPUT_STATUS_PRESS; }
-	int Press2(DWORD key)
-	{
-		if (keyMap[key] == KEY_INPUT_STATUS_PRESS)
-			return (int)key;
-	}
 
 private:
 	Keyboard();
