@@ -83,7 +83,9 @@ void Animator::SetCurrentAnimClip(wstring clipName)
 {
 	if (currentClip == nullptr && CheckExist(clipName) == true)
 		currentClip = animClips.find(clipName)->second;
-	else if (currentClip != nullptr && currentClip->clipName == clipName)
+	else if (currentClip != nullptr && currentClip->clipName != clipName)
+		currentClip = animClips.find(clipName)->second;
+	else if (currentClip->clipName == clipName)
 		return;
 
 	if (CheckExist(clipName))
@@ -102,85 +104,9 @@ void Animator::SetCurrentAnimClip(wstring clipName)
 
 void Animator::SetAnim(AnimationClip * clip)
 {
-	if (clip->clipName == L"IdleR")
-	{
+	
+		
 		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"IdleL")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"WalkR")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"WalkU")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"WalkD")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"WalkL")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"JumpR")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"JumpL")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"SprintR")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"SprintL")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Attack1R")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Attack1L")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Attack2R")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Attack2L")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Attack3R")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Attack3L")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Skill1R")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Skill1L")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Skill2R")
-	{
-		AddAnimClip(clip);
-	}
-	else if (clip->clipName == L"Skill2L")
-	{
-		AddAnimClip(clip);
-	}
-
+	
+	
 }

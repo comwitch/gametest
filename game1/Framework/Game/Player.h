@@ -10,9 +10,21 @@ public:
 
 	virtual void Update() override;
 	virtual void Render() override;
-	virtual void Move() override;
-	
-	class Control* control = nullptr;
+	AnimationRect* GetanimRect() { return animRect; }
 
-	AnimationRect* GetAnim() { return animRect; }
+	
+	
+	
+
+
+
+
+private:
+
+	
+
+
+	class HPRect* HP1 = nullptr;
+	class HPRect* HP2 = nullptr;
+
 };

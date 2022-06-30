@@ -6,17 +6,21 @@ Rect::Rect(Vector3 position, Vector3 size, float rotation)
 {
 	//vertices
 	{
-		vertices[0].position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-		vertices[0].color = Color(1, 0, 0, 1);
+		vertices.assign(4, VertexColor());
+		{
+			vertices[0].position = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+			vertices[0].color = Color(1, 0, 0, 1);
 
-		vertices[1].position = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
-		vertices[1].color = Color(1, 0, 0, 1);
+			vertices[1].position = D3DXVECTOR3(0.0f, 1.0f, 0.0f);
+			vertices[1].color = Color(1, 0, 0, 1);
 
-		vertices[2].position = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
-		vertices[2].color = Color(1, 0, 0, 1);
+			vertices[2].position = D3DXVECTOR3(1.0f, 0.0f, 0.0f);
+			vertices[2].color = Color(1, 0, 0, 1);
 
-		vertices[3].position = D3DXVECTOR3(1.0f, 1.0f, 0.0f);
-		vertices[3].color = Color(1, 0, 0, 1);
+			vertices[3].position = D3DXVECTOR3(1.0f, 1.0f, 0.0f);
+			vertices[3].color = Color(1, 0, 0, 1);
+		}
+		
 	}
 
 	//vertexBuffer

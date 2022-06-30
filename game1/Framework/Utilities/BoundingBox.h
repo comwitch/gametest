@@ -13,6 +13,8 @@ public:
 	~BoundingBox();
 
 	bool AABB(BoundingBox* ohter);
+	RectEdge* GetEdge() { return edge; }
+
 
 private:
 	RectEdge* edge = nullptr;

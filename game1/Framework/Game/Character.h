@@ -11,7 +11,9 @@ public:
 
 	virtual void Update() = 0;
 	virtual void Render() = 0;
-	virtual void Move() = 0;
+	Vector3* GetPosition();
+	void SetCollision(float LT_x, float LT_y, float RB_x, float RB_y);
+	
 
 protected:
 	AnimationRect* animRect = nullptr;

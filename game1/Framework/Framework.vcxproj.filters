@@ -30,8 +30,18 @@
     <ClCompile Include="Geomatries\AnimationRect.cpp" />
     <ClCompile Include="Game\Character.cpp" />
     <ClCompile Include="Game\Player.cpp" />
-    <ClCompile Include="Utilities\Control.cpp" />
+    <ClCompile Include="Game\TileSet.cpp" />
+    <ClCompile Include="Game\TMap.cpp" />
+    <ClCompile Include="Game\Tile.cpp" />
     <ClCompile Include="Systems\Camera.cpp" />
+    <ClCompile Include="Utilities\PControl.cpp" />
+    <ClCompile Include="Game\enemy.cpp" />
+    <ClCompile Include="Game\Arrow.cpp" />
+    <ClCompile Include="Systems\GData.cpp" />
+    <ClCompile Include="Utilities\Collisionengine.cpp" />
+    <ClCompile Include="Geomatries\TextureRect2.cpp" />
+    <ClCompile Include="Geomatries\HPRect.cpp" />
+    <ClCompile Include="Game\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -67,7 +77,17 @@
     <ClInclude Include="Geomatries\AnimationRect.h" />
     <ClInclude Include="Game\Character.h" />
     <ClInclude Include="Game\Player.h" />
-    <ClInclude Include="Utilities\Control.h" />
+    <ClInclude Include="Game\TileSet.h" />
+    <ClInclude Include="Game\TMap.h" />
+    <ClInclude Include="Game\Tile.h" />
     <ClInclude Include="Systems\Camera.h" />
+    <ClInclude Include="Utilities\PControl.h" />
+    <ClInclude Include="Game\enemy.h" />
+    <ClInclude Include="Game\Arrow.h" />
+    <ClInclude Include="Systems\GData.h" />
+    <ClInclude Include="Utilities\Collisionengine.h" />
+    <ClInclude Include="Geomatries\TextureRect2.h" />
+    <ClInclude Include="Geomatries\HPRect.h" />
+    <ClInclude Include="Game\Time.h" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,9 @@
 #pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
 #endif
 
+
+
+
 //미리 컴파일된 헤더.
 //pch pre compiled header
 
@@ -15,6 +18,8 @@
 #include <string>
 #include <unordered_map>
 #include <assert.h>
+//#include <algorithm>
+#include <functional>
 
 using namespace std;
 
@@ -49,7 +54,6 @@ using namespace std;
 #include "Interfaces/IObject.h"
 
 #include "Utilities/SingletonBase.h"
-
 
 #include "Systems/Graphics.h"
 #include "Systems/Keyboard.h"
@@ -91,7 +95,11 @@ typedef UINT		uint;
 #include "Utilities/BoundingBox.h"
 #include "Utilities/String.h"
 #include "Utilities/Path.h"
-#include "Utilities/Control.h"
+#include "Utilities/PControl.h"
+#include "Utilities/Collisionengine.h"
+#include "Systems/Camera.h"
+#include "Systems/GData.h"
+
 
 
 #define WinMaxWidth 1280

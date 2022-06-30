@@ -1,6 +1,8 @@
 #include "Framework.h"
 #include "TextureRect.h"
 
+
+
 TextureRect::TextureRect(Vector3 position, Vector3 size, float rotation, wstring path)
 	:position(position), size(size), rotation(rotation)
 {
@@ -10,6 +12,7 @@ TextureRect::TextureRect(Vector3 position, Vector3 size, float rotation, wstring
 
 		vertices[0].position = D3DXVECTOR3(-0.5f, -0.5f, -0.0f);
 		vertices[0].uv = D3DXVECTOR2(0, 1);
+		
 
 		vertices[1].position = D3DXVECTOR3(0.5f, 0.5f, 0.0f);
 		vertices[1].uv = D3DXVECTOR2(1, 0);
@@ -125,6 +128,9 @@ TextureRect::TextureRect(Vector3 position, Vector3 size, float rotation)
 		il->Create(VertexTexture::descs, VertexTexture::count, vs->GetBlob());
 	}
 
+
+	edge = new RectEdge();
+	box = new BoundingBox(edge);
 	wb = new WorldBuffer();
 }
 
@@ -137,6 +143,9 @@ TextureRect::~TextureRect()
 	SAFE_DELETE(il);
 	SAFE_DELETE(wb);
 	SAFE_RELEASE(srv);
+
+	SAFE_DELETE(edge);
+	SAFE_DELETE(box);
 }
 
 void TextureRect::SetShader(wstring shaderPath)
@@ -162,6 +171,13 @@ void TextureRect::UpdateWorld()
 
 	world = S * R * T;
 	wb->SetWorld(world);
+
+	//충돌을 위한 Edge를 가져오는 부분. CollisionEdge_LT, RB를 통해 최대한 이미지에 맞게 바꾸어 준다.
+	D3DXVec3TransformCoord(&edge->LT, &vertices[3].position, &world);
+	D3DXVec3TransformCoord(&edge->RB, &vertices[2].position, &world);
+	edge->LT = { edge->LT.x + CollisionEdge_LT.x,edge->LT.y - CollisionEdge_LT.y,edge->LT.z };
+	edge->RB = { edge->RB.x - CollisionEdge_RB.x,edge->RB.y + CollisionEdge_RB.y,edge->RB.z };
+	
 }
 
 void TextureRect::Render()
@@ -181,15 +197,7 @@ void TextureRect::Render()
 
 void TextureRect::Move()
 {
-	/*if (Keyboard::Get()->Press('W'))
-		position.y += 100 * Time::Delta();
-	else if (Keyboard::Get()->Press('S'))
-		position.y -= 100 * Time::Delta();
 
-	if (Keyboard::Get()->Press('D'))
-		position.x += 100 * Time::Delta();
-	else if (Keyboard::Get()->Press('A'))
-		position.x -= 100 * Time::Delta();*/
 }
 
 void TextureRect::GUI()

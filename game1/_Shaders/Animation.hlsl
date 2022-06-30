@@ -10,6 +10,8 @@ struct PixelInput
     float2 uv : TEXCOORD0;
 };
 
+
+
 cbuffer WorldBuffer : register(b0)
 {
     matrix _world;
@@ -19,6 +21,11 @@ cbuffer VPBuffer : register(b1)
 {
     matrix _view;
     matrix _projection;
+}
+
+cbuffer ShadedBuffer : register(b0)
+{
+	int Selection;
 }
 
 PixelInput VS(VertexInput input)
@@ -39,8 +46,19 @@ SamplerState _samp : register(s0);
 
 float4 PS(PixelInput input) : SV_Target
 {
-    float4 color = _sourceTex.Sample(_samp, input.uv);
-    
+	float4 color = _sourceTex.Sample(_samp, input.uv);
+
+	float4 redColor = { 0.01f, 0.1f, 0.1f, 0.5f };
+
+	if (Selection == 0)
+	{
+		return color;
+	}
+	else if (Selection == 1)
+	{
+		return dot(color, redColor);
+	}
+
     return color;
  
 }

@@ -20,19 +20,42 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Game\Arrow.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Game\Character.cpp" />
+    <ClCompile Include="Game\enemy.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\Tile.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Game\TileSet.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Game\Time.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Game\TMap.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Geomatries\AnimationRect.cpp" />
     <ClCompile Include="Geomatries\BlurTexture.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Geomatries\HPRect.cpp" />
     <ClCompile Include="Geomatries\Rect.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Geomatries\ShadedTexture.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Geomatries\TextureRect.cpp" />
+    <ClCompile Include="Geomatries\TextureRect2.cpp" />
+    <ClCompile Include="Systems\GData.cpp" />
+    <ClCompile Include="Utilities\Collisionengine.cpp" />
+    <ClCompile Include="Utilities\PControl.cpp" />
     <ClCompile Include="Renders\IA\IndexBuffer.cpp" />
     <ClCompile Include="Renders\IA\InputLayout.cpp" />
     <ClCompile Include="Renders\IA\VertexBuffer.cpp" />
@@ -46,11 +69,12 @@
     <ClCompile Include="Systems\Graphics.cpp" />
     <ClCompile Include="Systems\Keyboard.cpp" />
     <ClCompile Include="Systems\Mouse.cpp" />
-    <ClCompile Include="Systems\Time.cpp" />
+    <ClCompile Include="Systems\Time.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Systems\Window.cpp" />
     <ClCompile Include="Utilities\Animator.cpp" />
     <ClCompile Include="Utilities\BoundingBox.cpp" />
-    <ClCompile Include="Utilities\Control.cpp" />
     <ClCompile Include="Utilities\DirectHelper.cpp" />
     <ClCompile Include="Utilities\Gui.cpp" />
     <ClCompile Include="Utilities\Path.cpp" />
@@ -59,20 +83,43 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
+    <ClInclude Include="Game\Arrow.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Game\Character.h" />
+    <ClInclude Include="Game\enemy.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\Tile.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Game\TileSet.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Game\Time.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Game\TMap.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Geomatries\AnimationRect.h" />
     <ClInclude Include="Geomatries\BlurTexture.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Geomatries\HPRect.h" />
     <ClInclude Include="Geomatries\Rect.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Geomatries\ShadedTexture.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Geomatries\TextureRect.h" />
+    <ClInclude Include="Geomatries\TextureRect2.h" />
     <ClInclude Include="Interfaces\IObject.h" />
+    <ClInclude Include="Systems\GData.h" />
+    <ClInclude Include="Utilities\Collisionengine.h" />
+    <ClInclude Include="Utilities\PControl.h" />
     <ClInclude Include="Renders\IA\IndexBuffer.h" />
     <ClInclude Include="Renders\IA\InputLayout.h" />
     <ClInclude Include="Renders\IA\VertexBuffer.h" />
@@ -84,15 +131,16 @@
     <ClInclude Include="Renders\Shaders\PixelShader.h" />
     <ClInclude Include="Renders\Shaders\VertexShader.h" />
     <ClInclude Include="Renders\States.h" />
-    <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Systems\Graphics.h" />
     <ClInclude Include="Systems\Keyboard.h" />
     <ClInclude Include="Systems\Mouse.h" />
-    <ClInclude Include="Systems\Time.h" />
+    <ClInclude Include="Systems\Time.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Systems\Window.h" />
+    <ClInclude Include="Systems\Camera.h" />
     <ClInclude Include="Utilities\Animator.h" />
     <ClInclude Include="Utilities\BoundingBox.h" />
-    <ClInclude Include="Utilities\Control.h" />
     <ClInclude Include="Utilities\DirectHelper.h" />
     <ClInclude Include="Utilities\Gui.h" />
     <ClInclude Include="Utilities\Path.h" />

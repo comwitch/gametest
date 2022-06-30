@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "TextureDemo.h"
-
-#include "Geomatries/TextureRect.h"
+#include "Geomatries/TextureRect2.h"
 
 void TextureDemo::Init()
 {
-	tr = new TextureRect(Vector3(640, 360, 0), Vector3(WinMaxWidth, WinMaxHeight, 1), 0.0f, TexturePath + L"Back.png");
+	tr = new TextureRect2(Vector3(640, 360, 0), Vector3(WinMaxWidth, WinMaxHeight, 1), 0.0f, TexturePath + L"background.png");
 }
 
 void TextureDemo::Destroy()
@@ -16,6 +15,8 @@ void TextureDemo::Destroy()
 void TextureDemo::Update()
 {
 	tr->Update();
+	if (Keyboard::Get()->Press('S'))
+		Valid = false;
 }
 
 void TextureDemo::Render()
@@ -29,4 +30,14 @@ void TextureDemo::PostRender()
 
 void TextureDemo::GUI()
 {
+}
+
+bool TextureDemo::IsValid()
+{
+	return Valid;
+}
+
+void TextureDemo::SetIsValid(bool _valid)
+{
+	this->Valid = _valid;
 }

@@ -9,8 +9,18 @@ public:
 	virtual void Render() override;
 	virtual void PostRender() override;
 	virtual void GUI() override;
+	virtual bool IsValid() override;
+	virtual void SetIsValid(bool _valid) override ;
 	
 private:
-	class TextureRect* tr = nullptr;
+	class TextureRect2* tr = nullptr;
+	bool Valid = true;
+
+	
+	
+
+
+	
+	
 
 };

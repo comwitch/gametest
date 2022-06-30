@@ -10,6 +10,12 @@ public:
 	
 	virtual void Render()		= 0;
 	virtual void PostRender()	= 0;	// 후처리가 필요한 코드를 처리
-	
+	virtual bool IsValid()		= 0;	// 해당 demo가 실행할 만한 이유가 있는지 확인
+	virtual void SetIsValid(bool _valid) = 0;
+
+
 	virtual void GUI()			= 0;	// 외부 라이브러리
+
+
+
 };

@@ -2,37 +2,38 @@
 #include "Program.h"
 
 #include "Systems/Window.h"
-#include "Systems/Camera.h"
+
 #include "Demos/GUIDemo.h"
 #include "Demos/RectDemo.h"
 #include "Demos/TextureDemo.h"
+
 #include "Demos/ShadedDemo.h"
 #include "Demos/RTTDemo.h"
 #include "Demos/BlurDemo.h"
 #include "Demos/CollisionDemo.h"
 #include "Demos/AnimationDemo.h"
 #include "Demos/PlayerDemo.h"
+#include "Demos/TileDemo.h"
+#include "Demos/CollisionDemo.h"
+#include "Demos/GameoverDemo.h"
+
 
 void Program::Init()
 {
 	States::Create();
 	Camera::Create();
 	
-	//vpb = new VPBuffer();
-	//D3DXMatrixLookAtLH(&view, &Vector3(0, 0, 0), &Vector3(0, 0, 1), &Vector3(0, 1, 0));
-	//D3DXMatrixOrthoOffCenterLH(&proj, 0.0f, (float)WinMaxWidth, 0.0f, (float)WinMaxHeight, 0, 1);
-	//vpb->SetView(view);
-	//vpb->SetProj(proj);
-	
-	//Push(new RectDemo());
-	//Push(new TextureDemo());
-	//Push(new GUIDemo);
-	//Push(new ShadedDemo());
-	//Push(new RTTDemo());
-	//Push(new BlurDemo());
-	//Push(new CollisionDemo());
-	//Push(new AnimationDemo());
+	vpb = new VPBuffer();
+	D3DXMatrixLookAtLH(&view, &Vector3(0, 0, 0), &Vector3(0, 0, 1), &Vector3(0, 1, 0));
+	D3DXMatrixOrthoOffCenterLH(&proj, 0.0f, (float)WinMaxWidth, 0.0f, (float)WinMaxHeight, 0, 1);
+	vpb->SetView(view);
+	vpb->SetProj(proj);
+
+
+	Push(new TextureDemo());
 	Push(new PlayerDemo());
+	Push(new GameoverDemo());
+
 }
 
 void Program::Destroy()
@@ -48,37 +49,52 @@ void Program::Destroy()
 
 void Program::Update()
 {
-	Camera::Get()->Update();
-	
-	for (IObject* obj : objs)
+		
+
+	if (objs[count]->IsValid() == true)
+		objs[count]->Update();
+	else
+		count++;
+
+
+	if (count == objs.size())
 	{
-		obj->Update();
+		count = 0;
+		for (IObject* obj : objs)
+		{
+			obj->SetIsValid(true);
+		}
+
 	}
+	
+	
 }
 
 void Program::Render()
 {
-	Camera::Get()->Render();
-	for (IObject* obj : objs)
-	{
-		obj->Render();
-	}
+	vpb->SetVSBuffer(1);
+	
+
+	if (objs[count]->IsValid() == true)
+		objs[count]->Render();
+	
 }
 
 void Program::PostRender()
 {
-	for (IObject* obj : objs)
-	{
-		obj->PostRender();
-	}
+
+	if (objs[count]->IsValid() == true)
+		objs[count]->PostRender();
+
 }
 
 void Program::GUI()
 {
-	for (IObject* obj : objs)
-	{
-		obj->GUI();
-	}
+	
+
+	if (objs[count]->IsValid() == true)
+		(*objs[count]).GUI();
+
 }
 
 void Program::Push(IObject * obj)
@@ -87,12 +103,26 @@ void Program::Push(IObject * obj)
 	obj->Init();
 }
 
+bool Program::IsValid()
+{
+	return true;
+}
+
+
+
+void Program::SetIsValid(bool _valid)
+{
+
+}
+
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR param, int command)
 {
 	srand((UINT)time(NULL));
 
+
+	
 	DXDesc desc;
-	desc.AppName = L"D2DGame";
+	desc.AppName = L"GAME1";
 	desc.instance = instance;
 	desc.handle = NULL;
 	desc.width = WinMaxWidth;
@@ -103,7 +133,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR param, int 
 	WPARAM wParam = window->Run(program);
 	SAFE_DELETE(window);
 	SAFE_DELETE(program);
-
+	
 	return wParam;
 
 }
+
