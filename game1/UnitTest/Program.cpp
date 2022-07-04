@@ -16,12 +16,15 @@
 #include "Demos/TileDemo.h"
 #include "Demos/CollisionDemo.h"
 #include "Demos/GameoverDemo.h"
+#include "Systems/Sound.h"
+
 
 
 void Program::Init()
 {
 	States::Create();
 	Camera::Create();
+	CSound::Init();
 	
 	vpb = new VPBuffer();
 	D3DXMatrixLookAtLH(&view, &Vector3(0, 0, 0), &Vector3(0, 0, 1), &Vector3(0, 1, 0));
@@ -29,7 +32,7 @@ void Program::Init()
 	vpb->SetView(view);
 	vpb->SetProj(proj);
 
-
+	
 	Push(new TextureDemo());
 	Push(new PlayerDemo());
 	Push(new GameoverDemo());
@@ -39,7 +42,7 @@ void Program::Init()
 void Program::Destroy()
 {
 	SAFE_DELETE(vpb);
-
+	CSound::Release();
 	for (IObject* obj : objs)
 	{
 		obj->Destroy();
@@ -56,7 +59,7 @@ void Program::Update()
 	else
 		count++;
 
-
+	
 	if (count == objs.size())
 	{
 		count = 0;
@@ -122,6 +125,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR param, int 
 
 	
 	DXDesc desc;
+	
+
 	desc.AppName = L"GAME1";
 	desc.instance = instance;
 	desc.handle = NULL;
@@ -130,6 +135,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE prevInstance, LPSTR param, int 
 
 	Program* program = new Program();
 	Window* window = new Window(desc);
+	
 	WPARAM wParam = window->Run(program);
 	SAFE_DELETE(window);
 	SAFE_DELETE(program);

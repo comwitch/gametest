@@ -26,7 +26,7 @@ void Collisionengine::Update()
 	UpdateCollision();
 	UpdateVelocity();
 	
-
+	
 	
 	
 	//다음 속도 계산을 위한 현재 위치를 저장.
@@ -53,8 +53,16 @@ void Collisionengine::UpdateCollision()
 		for (iter2 = iter + 1; iter2 != datas.end(); iter2++)
 		{
 			
-			AABB((*iter), (*iter2));
+			if((*iter)->AnimRect->GetisLive() == true && (*iter2)->AnimRect->GetisLive() == true)
+				AABB((*iter), (*iter2));
 		
+			if ((*iter2)->AnimRect->GetHp() <= 0)
+			{
+				(*iter2)->AnimRect->SetisLive(false);
+				(*iter2)->AnimRect->SetPos(Vector3(0, 0, 1));
+				if((*iter)->checker == 2)
+					enemycount--;
+			}
 		}
 	}
 
@@ -74,49 +82,58 @@ bool Collisionengine::AABB(boxdata * A, boxdata * B)
 		//CollisionEffect(A, B);
 
 		// 겹치는 부분을 이용한 충돌
-		if(A->checker == 2 && B->checker == 2 && A->AnimRect->GetisLive() == true && B->AnimRect->GetisLive() == true)
+		if(A->checker == 2 && B->checker == 2)
 			CollisionOverlaps(A, B);
 
 
 
 		/*
 		캐릭터와 몬스터가 충돌했을 시 일어나는 반응 
-		1. 캐릭터의 HP가 10만큼 깎이고 그것을 hp상태바에 정보를 넘겨줌.
+		1. 캐릭터의 HP가 다름 애의 몬스터의 데미지 만큼 깎이고 그것을 hp상태바에 정보를 넘겨줌.
 		2. 캐릭터에 IsDamaged함수를 통해서 픽셀셰이더에 색을 바꿔줌(캐릭터가 깜박이는 효과)
 		
 		*/
 		if (A->checker == 1 && B->checker == 2 && checkerTime > 1.0f)
 		{
-			if (A->AnimRect->GetHp() > 0 && B->AnimRect->GetisLive() == true)
+			if (A->AnimRect->GetHp() > 0)
 			{
-				A->AnimRect->SetHp(A->AnimRect->GetHp() - 10);
+				A->AnimRect->SetHp(A->AnimRect->GetHp() - B->AnimRect->GetAttack());
 				checkerTime = 0;
 				A->AnimRect->isDamaged(1);
 			}	
 		}
-		if (B->checker == 1 && A->checker==2 && checkerTime > 1.0f)
+		else if (B->checker == 1 && A->checker==2 && checkerTime > 1.0f)
 		{
 			if (B->AnimRect->GetHp() > 0)
 			{
-				B->AnimRect->SetHp(B->AnimRect->GetHp() - 10);
+				B->AnimRect->SetHp(B->AnimRect->GetHp() - A->AnimRect->GetAttack());
 				checkerTime = 0;
 				B->AnimRect->isDamaged(1);
 			}	
 		}
 
-		if (A->checker == 3 && B->checker == 2 && A->AnimRect->GetisLive() == true && B->AnimRect->GetisLive() == true)
+		else if (A->checker == 3 && B->checker == 2 )
 		{
-			if (B->AnimRect->GetHp() > 0)
-			{
-				B->AnimRect->SetHp(B->AnimRect->GetHp() - 50);
-				A->AnimRect->SetisLive(false);
+			
+			
+			B->AnimRect->SetHp(B->AnimRect->GetHp() - A->AnimRect->GetAttack());
+			A->AnimRect->SetisLive(false);
+			A->AnimRect->SetPos({ 0,0,1 });
 
-			}
-			else
-			{
-				A->AnimRect->SetisLive(false);
-				B->AnimRect->SetisLive(false);
-			}
+			
+			
+		}
+		else if (A->checker == 2 && B->checker == 3)
+		{
+			
+			
+			B->AnimRect->SetHp(B->AnimRect->GetHp() - A->AnimRect->GetAttack());
+			A->AnimRect->SetisLive(false);
+			A->AnimRect->SetPos({ 0,0,1 });
+
+			
+
+			
 		}
 		
 		
@@ -126,7 +143,7 @@ bool Collisionengine::AABB(boxdata * A, boxdata * B)
 	{
 		//충돌하지 않으면 다시 원래대로 돌려놓음
 		A->AnimRect->isDamaged(0);
-		B->AnimRect->isDamaged(0);
+		//B->AnimRect->isDamaged(0);
 		
 		return false;
 	}
@@ -195,7 +212,7 @@ void Collisionengine::CollisionOverlaps(boxdata * A, boxdata * B)
 
 	*/
 	
-	Vector3 tmpAxis = (*(*A).position) - (*(*B).position);
+	Vector3 tmpAxis = (*(*A).AnimRect->GetPos()) - (*(*B).AnimRect->GetPos());
 	float normalize = sqrt((tmpAxis.x)*(tmpAxis.x) + (tmpAxis.y)*(tmpAxis.y));
 	Vector3 normalizedtmpAxis = tmpAxis / normalize;
 	// 2차원 상에서의 normal vector를 구하는 관계로 기존 벡터에서 90도 회전변환만 해주면 된다.
@@ -224,8 +241,13 @@ void Collisionengine::CollisionOverlaps(boxdata * A, boxdata * B)
 	
 	float Overlapsize = sqrt((Overlapdata.x)*(Overlapdata.x) + (Overlapdata.y)*(Overlapdata.y));
 
-	(*(*B).position) = (*(*B).position) - 0.1*(Overlapsize)*normalizedtmpAxis - 0.1*(Overlapsize)*normalizedtmpAxis_normalVector;
+	//(*(*B).position) = (*(*B).position) - 0.1*(Overlapsize)* Vector3( 1, 0, 0 ) -0.1*(Overlapsize)*normalizedtmpAxis_normalVector;
+	//(*(*A).position) = (*(*A).position) + 0.1*(Overlapsize)*normalizedtmpAxis + 0.1*(Overlapsize)*normalizedtmpAxis_normalVector;
+
+	(*(*B).position) = (*(*B).position) - 0.1*(Overlapsize)* normalizedtmpAxis - 0.1*(Overlapsize)*normalizedtmpAxis_normalVector;
 	(*(*A).position) = (*(*A).position) + 0.1*(Overlapsize)*normalizedtmpAxis + 0.1*(Overlapsize)*normalizedtmpAxis_normalVector;
+	(*(*B).position).z = 0.0f;
+	(*(*A).position).z = 0.0f;
 
 	
 
@@ -284,7 +306,7 @@ void Collisionengine::insert(BoundingBox * box, Vector3 * position,AnimationRect
 
 }
 
-//박스데이터의 벡터에서 특정 오브젝트를 position을 통해서 지우는 부분.
+//박스데이터의 벡터에서 특정 오브젝트를 position을 통해서 지우는 부분. (수정필요)
 
 void Collisionengine::erase(Vector3 * position)
 {

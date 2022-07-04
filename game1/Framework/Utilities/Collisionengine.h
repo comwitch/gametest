@@ -37,6 +37,9 @@ public:
 	void UpdateVelocity();
 
 
+	//사라진 적 수 확인
+	int GetEnemycount() { return enemycount; }
+	void SetEnemycount(int count) { this->enemycount = count; }
 	
 	//각 구조체의 규격및, 월드버퍼의 포지션을 저장해서 엔진에서 만들어서 사용.
 	void insert(BoundingBox* box, Vector3* position, AnimationRect* AnimRect, int checker);
@@ -61,6 +64,7 @@ private:
 	Vector3 Position;
 	int count = -1;
 
+	int enemycount;
 	
 
 

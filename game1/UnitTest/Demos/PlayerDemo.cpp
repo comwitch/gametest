@@ -4,18 +4,24 @@
 #include "Game/Player.h"
 #include "Game/Arrow.h"
 #include "Geomatries/TextureRect2.h"
+#include "Game/UI.h"
+#include "Systems/Sound.h"
 
 
 void PlayerDemo::Init()
 {
+	
 	Camera::Create();
-	Gamemap = new TextureRect2({ 640,360,0 }, Vector3(2 * WinMaxWidth, 2 * WinMaxHeight, 1), 0.0f, TexturePath + L"bg_green.png");
+	Gamemap = new TextureRect2({ 640,360,0.5 }, Vector3(2 * WinMaxWidth, 2 * WinMaxHeight, 1), 0.0f, TexturePath + L"bg_green.png");
 	
 	player = new Player({ 640, 360, 0 }, { 100, 100, 1 });
 
 	arrow = new Arrow({ 0,0,1 }, { 50,50,1 });
+	arrow->GetanimRect()->SetAttack(30);
 
 	Vector3 * position22 = player->GetanimRect()->GetPos();
+
+	Sound = new CSound("bgm.mp3", true);
 
 	engine = new Collisionengine();
 
@@ -23,14 +29,18 @@ void PlayerDemo::Init()
 
 	engine->insert((arrow->GetanimRect()->GetBox()), (arrow->GetanimRect()->GetPos()), arrow->GetanimRect(), 3);
 
+	timeUI = new UI({ 560, 670, 0 }, { 40, 40, 1 }, 1);
 
+	engine->SetEnemycount(PoolSize);
 	
+	//오브젝트 풀링
 	for (int i  = 0 ; i < PoolSize ; i++)
 	{
 		int tmp_X = rand() % 1280;
 		int tmp_Y = rand() % 720;
 		EnemyPool.push_back(new Enemy({ (float)tmp_X, (float)tmp_Y, 1 }, { 100, 100, 1 }));
 		engine->insert(EnemyPool[i]->GetanimRect()->GetBox(), EnemyPool[i]->GetanimRect()->GetPos(), EnemyPool[i]->GetanimRect(), 2);
+		EnemyPool[i]->GetanimRect()->SetAttack(10);
 		
 	}
 
@@ -48,7 +58,8 @@ void PlayerDemo::Destroy()
 
 	SAFE_DELETE(engine);
 	SAFE_DELETE(Gamemap);
-	SAFE_DELETE(arrow);
+	SAFE_DELETE(player);
+	//SAFE_DELETE(arrow);
 	
 	vector<class Enemy*>::iterator iter = EnemyPool.begin();
 	for (; iter != EnemyPool.end(); iter++)
@@ -63,18 +74,34 @@ void PlayerDemo::Destroy()
 
 void PlayerDemo::Update()
 {
+	if (play == 0)
+	{
+		Sound->play();
+		play = 1;
+	}
+		
 	//시간업데이트
 	time += Time::Delta();
 	timechecker += Time::Delta();
+	
+	Sound->Update();
 
 	//플레이어가 죽었을 떄 죽고 현재 스테이지를 종료
 	if (player->GetanimRect()->GetHp() <= 0)
 	{
+		Sound->stop();
 		this->Destroy();
 		this->Init();
 		Valid = false;
+		time = 0.0f;
+		timechecker = 0.0f;
+		play = 0;
+		
+		
 	}
 
+	//시계 UI 구현
+	timeUI->UpdateTime((int)time);
 
 	//일시정지 구현
 	if (Keyboard::Get()->Down('P'))
@@ -83,11 +110,14 @@ void PlayerDemo::Update()
 		{
 			PauseCount++;
 			Time::Get()->Stop();
+			Sound->pause();
+
 		}
 		else
 		{
 			PauseCount--;
 			Time::Get()->Start();
+			Sound->resume();
 		}
 	}
 		
@@ -100,6 +130,7 @@ void PlayerDemo::Update()
 	//화살 업데이트
 	if (timechecker > 1.0f)
 	{
+		arrow->GetanimRect()->SetFacingWhere(player->GetanimRect()->GetDirection());
 		arrow->SetPlayerPos(*player->GetPosition());
 		arrow->GetanimRect()->SetisLive(true);
 		arrow->Update();
@@ -111,28 +142,38 @@ void PlayerDemo::Update()
 
 	// player 업데이트
 	player->Update();
+	engine->Update();
+	
 
 
 	// enemy 업데이트
 	vector<class Enemy*>::iterator iter = EnemyPool.begin();
 	for (; iter != EnemyPool.end(); iter++)
 	{
-		if ((*iter)->GetanimRect()->GetisLive() == true)
-		{
-			(*iter)->Update();
-
-		}
+		
+		(*iter)->Update();
+		(*iter)->Gettargetposition(*(player->GetanimRect()->GetPos()));
+		
 		if ((*iter)->GetanimRect()->GetisLive() == false)
 		{
 			
+			(*iter)->GetanimRect()->SetisLive(true);
+			(*iter)->GetanimRect()->SetHp(100);
+			(*iter)->Gettargetposition(*(player->GetanimRect()->GetPos()));
+			(*iter)->GetanimRect()->SetPos(Vector3(100, 100, 0));
 		}
-			
-		(*iter)->Gettargetposition(*(player->GetanimRect()->GetPos()));
+		
+		
 	}
 
+	
+	
+	
+	
 
-	// collision 업데이트
-	engine->Update();
+
+
+	
 
 
 
@@ -149,14 +190,17 @@ void PlayerDemo::Render()
 
 	player->Render();
 
+	timeUI->RenderTime();
+
 	vector<Enemy*>::iterator iter = EnemyPool.begin();
 	for (; iter != EnemyPool.end(); iter++)
 	{
-		if ((*iter)->GetanimRect()->GetisLive() == true)
+		if((*iter)->GetanimRect()->GetisLive() == true)
 			(*iter)->Render();
 		
-	}
 
+	}
+	
 
 	
 	if (arrow->GetanimRect()->GetisLive() == true)

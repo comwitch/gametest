@@ -18,5 +18,5 @@ public:
 
 private:
 	Vector3* PlayerPos = nullptr;
-	int FacingWhere = 0;
+
 };

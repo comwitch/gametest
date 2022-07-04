@@ -1,6 +1,7 @@
 #include "Framework.h"
 #include "Window.h"
 #include "Graphics.h"
+#include "Systems/Sound.h"
 
 
 //상대경로 : ./ 현재폴더, ../ 상위폴더
@@ -64,8 +65,12 @@ Window::Window(DXDesc desc)
 	SetForegroundWindow(desc.handle);
 	SetFocus(desc.handle);
 
+	
+
 	ShowCursor(true);//
 	Window::desc = desc;
+	
+
 
 	::instance = desc.instance;
 }
@@ -87,6 +92,8 @@ WPARAM Window::Run(IObject* mainObj)
 	Mouse::Create();
 	Time::Create();
 	Gui::Create();
+	
+
 
 	this->mainObj->Init();
 

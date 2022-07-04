@@ -3,7 +3,7 @@
 #include <Utilities/Animator.h>
 
 static int* checker;
-static int FacingWhere = 1; //0 is Left , 1 is Right , 2 is Up, 3 is Down 
+ 
 
 
 class PControl
@@ -23,8 +23,8 @@ public:
 	void Down(DWORD key, Vector3* position, float speed, wstring clipName);
 
 
-	static int GetFacingWhere() { return FacingWhere; }
-	static void SetFacingWhere(int i) { FacingWhere = i; }
+	int GetFacingWhere() { return FacingWhere; }
+	void SetFacingWhere(int i) { FacingWhere = i; }
 
 
 	void Attack(DWORD key);
@@ -67,6 +67,9 @@ private:
 	int _Skill = 4; //0 is left, 1 is right, 2 is Up, 3 is Down, 4 is notshooting
 	int tmp_Face = 0;
 	
+	int FacingWhere = 1; //0 is Left , 1 is Right , 2 is Up, 3 is Down 
+
+
 	float deltaTime = 0.0f;
 	float keyDown = 0.0f;
 	float checker = 0.0f;

@@ -14,6 +14,9 @@ public:
 	
 private:
 	class TextureRect2* tr = nullptr;
+	class UI* startUI = nullptr;
+
+	
 	bool Valid = true;
 
 	

@@ -29,6 +29,11 @@ using namespace std;
 #include <D3DX10math.h>
 #include <D3DX11async.h>
 
+#include <fmod.h>
+#include <fmod.hpp>
+
+
+
 #pragma comment(lib, "dxgi.lib")
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dx11.lib")
@@ -51,6 +56,7 @@ using namespace std;
 #include <DirectXTex/DirectXTex.h>
 #pragma comment(lib, "DirectXTex/DirectXTex.lib")
 
+#include <dsound.h>
 #include "Interfaces/IObject.h"
 
 #include "Utilities/SingletonBase.h"

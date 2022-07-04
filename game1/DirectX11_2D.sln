@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shaders", "_Shaders", "{3C
 		_Shaders\Animation.hlsl = _Shaders\Animation.hlsl
 		_Shaders\Blur.hlsl = _Shaders\Blur.hlsl
 		_Shaders\GrayScale.hlsl = _Shaders\GrayScale.hlsl
+		_Shaders\UITexture.hlsl = _Shaders\UITexture.hlsl
 		_Shaders\VertexColor.hlsl = _Shaders\VertexColor.hlsl
 		_Shaders\VertexOutline.hlsl = _Shaders\VertexOutline.hlsl
 		_Shaders\VertexTexture.hlsl = _Shaders\VertexTexture.hlsl

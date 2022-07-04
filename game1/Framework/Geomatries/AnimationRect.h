@@ -57,8 +57,16 @@ public:
 	void SetAttack(int _Attack) { this->Attack = _Attack; }
 	int GetAttack() { return Attack; }
 
+	int GetMaxHp() { return maxHp; }
+	void SetMaxHp(int hp) { this->maxHp = hp; }
+
 	bool GetisLive() { return isValid; }
 	void SetisLive(bool a) { this->isValid = a; }
+
+
+	//화살을 위한 방향
+	int GetDirection() { return control->GetFacingWhere(); }
+	void SetFacingWhere(int a) { this->_FacingWhere = a; }
 
 
 
@@ -68,7 +76,7 @@ private:
 	ID3D11SamplerState* point[2];
 	ID3D11BlendState* bPoint[2];
 	
-	int Character = 0; // 0 은 플레이어, 1 은 일반 몬스터, 2는 보스 몬스터, 3은 투사체
+	int Character = 0; // 0 은 플레이어, 1 은 일반 몬스터, 2는 보스 몬스터, 3은 투사체, 4는 아이템
 
 	
 	float KeyDown = 0.0f;
@@ -83,6 +91,7 @@ private:
 	// position 관련 변수
 	Vector3 beforeposition = { 0,0,0 };
 	
+	//hlsl 상수버퍼
 	ShadedBuffer* sb = nullptr;
 
 	bool isCollid = false;
@@ -91,6 +100,7 @@ private:
 
 	// 체력 데미지 죽었는지 
 	int Hp = 100;
+	int maxHp = 100;
 	int Attack = 5;
 
 	bool isValid = true;

@@ -41,7 +41,11 @@
     <ClCompile Include="Utilities\Collisionengine.cpp" />
     <ClCompile Include="Geomatries\TextureRect2.cpp" />
     <ClCompile Include="Geomatries\HPRect.cpp" />
-    <ClCompile Include="Game\Time.cpp" />
+    <ClCompile Include="Game\UI.cpp" />
+    <ClCompile Include="Utilities\UIalphabet.cpp" />
+    <ClCompile Include="Geomatries\UIRect.cpp" />
+    <ClCompile Include="Systems\Sound.cpp" />
+    <ClCompile Include="Geomatries\UITextureRect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework.h" />
@@ -88,6 +92,10 @@
     <ClInclude Include="Utilities\Collisionengine.h" />
     <ClInclude Include="Geomatries\TextureRect2.h" />
     <ClInclude Include="Geomatries\HPRect.h" />
-    <ClInclude Include="Game\Time.h" />
+    <ClInclude Include="Game\UI.h" />
+    <ClInclude Include="Utilities\UIalphabet.h" />
+    <ClInclude Include="Geomatries\UIRect.h" />
+    <ClInclude Include="Systems\Sound.h" />
+    <ClInclude Include="Geomatries\UITextureRect.h" />
   </ItemGroup>
 </Project>

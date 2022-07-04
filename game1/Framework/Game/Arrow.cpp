@@ -29,6 +29,11 @@ Arrow::Arrow(Vector3 position, Vector3 size)
 
 	animRect->SetAnimation(animator);
 
+
+	//충돌 범위를 조정시키는 함수
+	SetCollision(28, 22, 20, 28);
+
+
 	SAFE_DELETE(srcTex);
 	
 

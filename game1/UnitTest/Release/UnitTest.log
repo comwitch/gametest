@@ -1,0 +1,24 @@
+﻿  AnimationDemo.cpp
+g:\game1\unittest\demos\animationdemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  BlurDemo.cpp
+g:\game1\unittest\demos\blurdemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  CollisionDemo.cpp
+g:\game1\unittest\demos\collisiondemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  GameoverDemo.cpp
+g:\game1\unittest\demos\gameoverdemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  GUIDemo.cpp
+g:\game1\unittest\demos\guidemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  PlayerDemo.cpp
+g:\game1\unittest\demos\playerdemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  RectDemo.cpp
+g:\game1\unittest\demos\rectdemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  RTTDemo.cpp
+g:\game1\unittest\demos\rttdemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  ShadedDemo.cpp
+g:\game1\unittest\demos\shadeddemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Framework.h': No such file or directory
+  TextureDemo.cpp
+g:\game1\unittest\demos\texturedemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  TileDemo.cpp
+g:\game1\unittest\demos\tiledemo.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'stdafx.h': No such file or directory
+  Program.cpp
+g:\game1\unittest\stdafx.h(3): fatal error C1083: 포함 파일을 열 수 없습니다. 'Framework.h': No such file or directory
