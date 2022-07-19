@@ -3,7 +3,7 @@ directx 11 2d game
 
 # Hello! this is directX 2d gametest
 # the version will be update
-# you can see play on youtube : https://youtu.be/7OB0SK6YJdU
+# you can see play on youtube : https://www.youtube.com/watch?v=zXqcvuhA8G8
 
 
 ## 2022-06-14 : make origin
