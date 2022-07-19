@@ -70,7 +70,7 @@ Player::Player(Vector3 position, Vector3 size)
 	//arrow class
 	
 
-	animator->SetCurrentAnimClip(L"IdleL");
+	animator->SetCurrentAnimClip(L"IdleR");
 	
 	
 	animRect->SetAnimation(animator);

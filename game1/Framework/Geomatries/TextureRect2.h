@@ -14,6 +14,9 @@ public:
 	void UpdateWorld();
 	void Render();
 	virtual void Move();
+	Vector3 * Getpos() { return &position; }
+	
+
 
 	void GUI();
 

@@ -1,13 +1,13 @@
 #pragma once
-
 #include "TextureRect.h"
 
-class ShadedBuffer : public ShaderBuffer
+
+class ShadedBuffer23 : public ShaderBuffer
 {
 public:
-	ShadedBuffer() : ShaderBuffer(&data, sizeof(Data))
+	ShadedBuffer23() : ShaderBuffer(&data, sizeof(Data))
 	{
-		data.Selection = 1;
+		data.Selection = 0;
 	}
 
 	int * GetSelectionPtr() { return &data.Selection; }
@@ -25,12 +25,14 @@ private:
 class ShadedTexture : public TextureRect
 {
 public:
-	ShadedTexture(Vector3 position, Vector3 size, float rotation, wstring path);
+	ShadedTexture(Vector3 position, Vector3 size, float rotation);
 	~ShadedTexture();
 
 	void Render();
 	void GUI();
 
+	ShadedBuffer23* GetSB() { return sb; }
+
 private:
-	ShadedBuffer* sb = nullptr;
+	ShadedBuffer23* sb = nullptr;
 };

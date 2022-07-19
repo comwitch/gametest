@@ -53,16 +53,22 @@ void Collisionengine::UpdateCollision()
 		for (iter2 = iter + 1; iter2 != datas.end(); iter2++)
 		{
 			
-			if((*iter)->AnimRect->GetisLive() == true && (*iter2)->AnimRect->GetisLive() == true)
-				AABB((*iter), (*iter2));
-		
-			if ((*iter2)->AnimRect->GetHp() <= 0)
+			if ((*iter)->AnimRect->GetisLive() == true && (*iter2)->AnimRect->GetisLive() == true)
 			{
-				(*iter2)->AnimRect->SetisLive(false);
-				(*iter2)->AnimRect->SetPos(Vector3(0, 0, 1));
-				if((*iter)->checker == 2)
-					enemycount--;
+				AABB((*iter), (*iter2));
+
+				if ((*iter2)->AnimRect->GetHp() <= 0)
+				{
+					(*iter2)->AnimRect->SetisLive(false);
+
+					if ((*iter)->checker == 2)
+						enemycount--;
+
+				}
 			}
+				
+		
+			
 		}
 	}
 
@@ -127,9 +133,9 @@ bool Collisionengine::AABB(boxdata * A, boxdata * B)
 		{
 			
 			
-			B->AnimRect->SetHp(B->AnimRect->GetHp() - A->AnimRect->GetAttack());
-			A->AnimRect->SetisLive(false);
-			A->AnimRect->SetPos({ 0,0,1 });
+			A->AnimRect->SetHp(B->AnimRect->GetHp() - A->AnimRect->GetAttack());
+			B->AnimRect->SetisLive(false);
+			B->AnimRect->SetPos({ 0,0,1 });
 
 			
 

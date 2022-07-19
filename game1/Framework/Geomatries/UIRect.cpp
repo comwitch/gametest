@@ -6,7 +6,7 @@
 UIRect::UIRect(Vector3 position, Vector3 size)
 	:TextureRect2(position, size, 0.0f)
 {
-	SetShader(ShaderPath + L"Animation.hlsl");
+	SetShader(ShaderPath + L"VertexTexture.hlsl");
 	
 
 

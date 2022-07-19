@@ -37,7 +37,7 @@ public:
 
 	void SetAnimation(Animator* animator) { this->animator = animator; }
 	void SetCharacter(int _Character) { this->Character = _Character; }  //몬스터인지 캐릭터인지 투사체인지 설정해주는 함수
-
+	void SetEnemy(int _enemyselection) { this->enemyselection = _enemyselection; }
 	
 	Vector3 targetpostiont = { 0,0,0 };
 
@@ -68,6 +68,8 @@ public:
 	int GetDirection() { return control->GetFacingWhere(); }
 	void SetFacingWhere(int a) { this->_FacingWhere = a; }
 
+	void SetclipName(wstring clipname1, wstring clipname2);//1 은 왼쪽방향 2 는 오른쪽방향
+
 
 
 private:
@@ -78,7 +80,11 @@ private:
 	
 	int Character = 0; // 0 은 플레이어, 1 은 일반 몬스터, 2는 보스 몬스터, 3은 투사체, 4는 아이템
 
-	
+	//몬스터 전용 클립내임 이름바꾸기
+	wstring clipNameL = L"idleL";
+	wstring clipNameR = L"idleR";
+
+
 	float KeyDown = 0.0f;
 	float keyRate = 0.0f;
 	float deltaTime = 0.0f;
@@ -96,6 +102,9 @@ private:
 
 	bool isCollid = false;
 
+
+	//enemy종류
+	int enemyselection = 0;
 
 
 	// 체력 데미지 죽었는지 

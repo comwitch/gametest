@@ -3,7 +3,7 @@
 
 void Camera::Update()
 {
-	Move();
+	 
 }
 
 void Camera::Render()
@@ -11,27 +11,42 @@ void Camera::Render()
 	vpb->SetVSBuffer(1);
 }
 
-void Camera::Move()
+void Camera::Move(float time)
 {
-	if (Keyboard::Get()->Press(VK_LSHIFT))
+	if (((int)time % 3) < 1)
 	{
-		if (Keyboard::Get()->Press('W'))
-			position.y += CameraSpeed * Time::Delta();
-		else if(Keyboard::Get()->Press('S'))
-			position.y -= CameraSpeed * Time::Delta();
-
-		if (Keyboard::Get()->Press('A'))
+		if ((int)(time * 10) % 2 == 1)
+		{
 			position.x -= CameraSpeed * Time::Delta();
-		else if (Keyboard::Get()->Press('D'))
+			temp_position -= CameraSpeed * Time::Delta();
+		}
+			
+		if ((int)(time * 10) % 2 == 0)
+		{
 			position.x += CameraSpeed * Time::Delta();
+			temp_position += CameraSpeed * Time::Delta();
+		}
 	}
+	else
+	{
+		position.x -= temp_position;
+		temp_position = 0;
+	}
+	
 
+	
 	UpdateView();
+}
+
+
+void Camera::Move2()
+{
 }
 
 void Camera::UpdateView()
 {
 	D3DXMatrixLookAtLH(&view, &position, &(position + Values::FwdVec), &Values::UpVec);
+	D3DXMatrixOrthoOffCenterLH(&proj, 0.0f, (float)WinMaxWidth, 0.0f, (float)WinMaxHeight, 0, 1);
 	vpb->SetView(view);
 }
 

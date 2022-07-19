@@ -151,7 +151,7 @@ void TextureRect2::SetShader(wstring shaderPath)
 void TextureRect2::Update()
 {
 	UpdateWorld();
-	Move();
+	//Move();
 }
 
 void TextureRect2::UpdateWorld()

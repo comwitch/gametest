@@ -4,10 +4,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="Demos\GUIDemo.h" />
-    <ClInclude Include="Demos\RectDemo.h" />
     <ClInclude Include="Demos\TextureDemo.h" />
-    <ClInclude Include="Demos\ShadedDemo.h" />
-    <ClInclude Include="Demos\RTTDemo.h" />
     <ClInclude Include="Demos\BlurDemo.h" />
     <ClInclude Include="Demos\CollisionDemo.h" />
     <ClInclude Include="Demos\AnimationDemo.h" />
@@ -18,10 +15,7 @@
   <ItemGroup>
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="Demos\GUIDemo.cpp" />
-    <ClCompile Include="Demos\RectDemo.cpp" />
     <ClCompile Include="Demos\TextureDemo.cpp" />
-    <ClCompile Include="Demos\ShadedDemo.cpp" />
-    <ClCompile Include="Demos\RTTDemo.cpp" />
     <ClCompile Include="Demos\BlurDemo.cpp" />
     <ClCompile Include="Demos\CollisionDemo.cpp" />
     <ClCompile Include="Demos\AnimationDemo.cpp" />

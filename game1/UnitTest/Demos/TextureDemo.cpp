@@ -24,7 +24,11 @@ void TextureDemo::Update()
 
 
 	if (startUI->GetPressWhat() == 1)
+	{
+		startUI->SetPressWhat(0);
 		Valid = false;
+	}
+		
 }
 
 void TextureDemo::Render()

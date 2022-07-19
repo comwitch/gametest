@@ -89,13 +89,28 @@ void AnimationRect::Move()
 		control->Left(VK_LEFT, &position, 200, L"WalkL");
 		control->Up(VK_UP, &position, 200, L"WalkU");
 		control->Down(VK_DOWN, &position, 200, L"WalkD");
-		control->Attack('A');
-		control->Skill('S', 'D');
+		//control->Attack('A');
+		//control->Skill('S', 'D');
 		
 	}
 	if (Character == 1)
 	{
-		control->move(&position, &targetpostiont, 100);
+		if (Hp > 0)
+		{
+			if (enemyselection == 0)
+				control->move(&position, &targetpostiont, 100, L"IdleR", L"IdleL");
+			if (enemyselection == 1)
+				control->move(&position, &targetpostiont, 100, L"IdleR2", L"IdleL2");
+			if (enemyselection == 2)
+				control->move(&position, &targetpostiont, 100, L"IdleR3", L"IdleL3");
+			if (enemyselection == 3)
+				control->move(&position, &targetpostiont, 100, L"IdleR4", L"IdleL4");
+		}
+		
+
+
+		
+	
 	}
 	
 	if (Character == 2)
@@ -118,4 +133,10 @@ bool AnimationRect::AABB(BoundingBox * other)
 		return false;
 	}
 	
+}
+
+void AnimationRect::SetclipName(wstring clipname1, wstring clipname2)
+{
+	this->clipNameL = clipname1;
+	this->clipNameR = clipname2;
 }

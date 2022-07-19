@@ -1,10 +1,11 @@
 #include "Framework.h"
 #include "ShadedTexture.h"
 
-ShadedTexture::ShadedTexture(Vector3 position, Vector3 size, float rotation, wstring path)
-	:TextureRect(position, size, rotation, path)
+
+ShadedTexture::ShadedTexture(Vector3 position, Vector3 size, float rotation)
+	:TextureRect(position, size, rotation)
 {
-	sb = new ShadedBuffer();
+	sb = new ShadedBuffer23();
 }
 
 ShadedTexture::~ShadedTexture()

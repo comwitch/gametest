@@ -1,9 +1,0 @@
-﻿  Collisionengine.cpp
-g:\game1\framework\utilities\collisionengine.cpp(190): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-g:\game1\framework\utilities\collisionengine.cpp(191): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-g:\game1\framework\utilities\collisionengine.cpp(195): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-g:\game1\framework\utilities\collisionengine.cpp(196): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-g:\game1\framework\utilities\collisionengine.cpp(247): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-g:\game1\framework\utilities\collisionengine.cpp(248): warning C4244: '인수': 'double'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Framework.vcxproj -> G:\game1\Debug\Framework.lib
-          1개 파일이 복사되었습니다.

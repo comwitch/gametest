@@ -10,7 +10,8 @@ public:
 	void Update();
 	void Render();
 
-	void Move();
+	void Move(float time);
+	void Move2();
 
 	void UpdateView();
 
@@ -24,6 +25,8 @@ private:
 	Matrix view, proj;
 
 	Vector3 position = Values::ZeroVec3;
+	float temp_position = 0.0f;
+	
 	float CameraSpeed = 100.0f;
 
 };

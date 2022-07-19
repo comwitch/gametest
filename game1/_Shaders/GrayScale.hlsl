@@ -45,31 +45,12 @@ float4 PS(PixelInput input) : SV_Target
 {
     float4 color = _sourceTex.Sample(_samp, input.uv);
     
-    float3 greyscale = 0;
-    if (Selection == 1)
-    {
-        return _sourceTex.Sample(_samp, input.uv);
-    }
-    else if(Selection == 2)
-    {
-        greyscale = (color.r + color.g + color.b) / 3.0f;
-        //greyscale = color.r + 0.299f, color.g + 0.587f, color.b + 0.114f;
-    }
-    else if(Selection == 3)
-    {
-        greyscale = dot(color.rgb, float3(.299f, .587f, .114f));
-    }
-    else if(Selection == 4)
-    {
-        float r, g, b;
-        r = dot(color.rgb, float3(0.393f, 0.769f, 0.189f));
-        g = dot(color.rgb, float3(0.349f, 0.686f, 0.168f));
-        b = dot(color.rgb, float3(0.272f, 0.534f, 0.131f));
-        greyscale = float3(r, g, b);
-    }
-    else
-    {
-        greyscale = color.rgb;
-    }
+	float3 greyscale = { 0.89f, 0.2f, 0.3f };
+
+
+	//lerp 선형 보간함수 (원래 하고싶은 픽셀의 rgb값, 대상 rgb값, 비율)
+	greyscale = lerp(greyscale, color , 1-((float)Selection/100.0f));
+
+	
     return float4(greyscale, 1);
 }

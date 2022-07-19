@@ -18,7 +18,26 @@
 #include "Demos/GameoverDemo.h"
 #include "Systems/Sound.h"
 
+/*
+2022-07-13
 
+DWs Game
+
+Using tools : 
+DirectX11, 
+Fmod(Version : 2.02),
+win api
+
+image, sound source site
+
+sound : https://soundimage.org/
+image : 
+
+If you have question, contact to me : tuna831@gmail.com
+
+Have a nice day!
+-Dongwon, Kim
+*/
 
 void Program::Init()
 {
@@ -35,19 +54,18 @@ void Program::Init()
 	
 	Push(new TextureDemo());
 	Push(new PlayerDemo());
-	Push(new GameoverDemo());
 
 }
 
 void Program::Destroy()
 {
 	SAFE_DELETE(vpb);
-	CSound::Release();
 	for (IObject* obj : objs)
 	{
 		obj->Destroy();
 		SAFE_DELETE(obj);
 	}
+	CSound::Release();
 }
 
 void Program::Update()

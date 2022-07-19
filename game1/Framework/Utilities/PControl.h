@@ -32,7 +32,7 @@ public:
 	
 	
 	// enemy control
-	void move(Vector3* position, Vector3* targetPosition, float speed);
+	void move(Vector3* position, Vector3* targetPosition, float speed, wstring clipName1, wstring clipName2);
 
 	
 

@@ -206,18 +206,18 @@ void PControl::Skill(DWORD key, DWORD key2)
 
 
 
-void PControl::move(Vector3 * position, Vector3 * targetPosition, float speed)
+void PControl::move(Vector3 * position, Vector3 * targetPosition, float speed, wstring clipName1, wstring clipName2)
 {
 	(*position).x += (((*targetPosition).x - (*position).x) / 2) * 1 * Time::Delta();
 	(*position).y += (((*targetPosition).y - (*position).y) / 2) * 1 * Time::Delta();
 
 	if (((*targetPosition).x - (*position).x) > 0) 
 	{
-		(*animator)->SetCurrentAnimClip(L"IdleR");
+		(*animator)->SetCurrentAnimClip(clipName1);
 	}
 	else
 	{
-		(*animator)->SetCurrentAnimClip(L"IdleL");
+		(*animator)->SetCurrentAnimClip(clipName2);
 	}
 
 
