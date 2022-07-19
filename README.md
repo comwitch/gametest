@@ -9,3 +9,4 @@ directx 11 2d game
 ## 2022-06-14 : make origin
 ## 2022-06-29 : make gamesystem (collisionengine)
 ## 2022-07-04 : make UI and sound system
+## 2022-07-11 : update UI, RTV
